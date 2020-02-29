@@ -49,7 +49,6 @@ body {
     position: absolute;
     left: 15%;
     bottom: 0;
-    display: none;
     z-index: -1;
     transform: translateY(-100px);
 }
