@@ -18,7 +18,7 @@ $(document).ready(function () {
     
     // initial sizes
     var ballHeight = $('#ball').height()
-    var cupTop = parseFloat($('.cup').css('top'))
+    var cupTop
 
     // time for levels
     var time = 300
