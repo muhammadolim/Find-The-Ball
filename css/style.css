@@ -148,3 +148,53 @@ body {
     cursor: pointer;
     display: none;
 }
+
+@media (max-width: 575px) {
+    .cups .cup {
+        transform: scale(.6);
+        transform-origin: top center;
+    }
+
+    .buttons p#game-over {
+        font-size: 40px;
+        margin-bottom: 20px;
+    }
+
+    @keyframes gameOver {
+        0% {
+            word-spacing: 100px;
+        }
+
+        8% {
+            word-spacing: 0px;
+        }
+
+        16% {
+            word-spacing: 100px;
+        }
+
+        24% {
+            word-spacing: 0px;
+        }
+
+        32% {
+            word-spacing: 100px;
+        }
+
+        47% {
+            word-spacing: 0px;
+        }
+
+        62% {
+            word-spacing: 100px;
+        }
+
+        78% {
+            word-spacing: 50px;
+        }
+
+        93% {
+            word-spacing: 0px;
+        }
+    }
+}
