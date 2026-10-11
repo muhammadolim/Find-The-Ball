@@ -18,12 +18,7 @@ $(document).ready(function () {
     
     // initial sizes
     var ballHeight = $('#ball').height()
-    var cupTop = $('.cup').offset().top
-
-    // cups positions
-    var cup1 = $('.cup1').offset().left
-    var cup2 = $('.cup2').offset().left
-    var cup3 = $('.cup3').offset().left
+    var cupTop = parseFloat($('.cup').css('top'))
 
     // time for levels
     var time = 300
@@ -39,6 +34,8 @@ $(document).ready(function () {
 
         // disable to click on cups
         $('.cup').addClass('avoid-clicks')
+
+        cupTop = parseFloat($('.cup').css('top'))
 
         // cups up
         $cups.css({
@@ -75,24 +72,28 @@ $(document).ready(function () {
                     var rand2 = Math.floor(Math.random() * 3 + 1)
                 }
 
+                // positions of two cups
+                var left1 = parseFloat($(`.cup${rand1}`).css('left'))
+                var left2 = parseFloat($(`.cup${rand2}`).css('left'))
+
                 // half distance between two cups
-                var distance = ($(`.cup${rand1}`).offset().left - $(`.cup${rand2}`).offset().left) / 2
+                var distance = (left1 - left2) / 2
 
                 // change position of first cup like this /\
                 $(`.cup${rand1}`).animate({
-                    left: $(`.cup${rand2}`).offset().left + distance,
+                    left: left2 + distance,
                     top: `${cupTop + 50}`
                 }, time, 'linear').animate({
-                    left: $(`.cup${rand2}`).offset().left,
+                    left: left2,
                     top: `${cupTop}`
                 }, time, 'linear')
 
                 // change position of second cup like this \/
                 $(`.cup${rand2}`).animate({
-                    left: $(`.cup${rand1}`).offset().left - distance,
+                    left: left1 - distance,
                     top: `${cupTop - 50}`
                 }, time, 'linear').animate({
-                    left: $(`.cup${rand1}`).offset().left,
+                    left: left1,
                     top: `${cupTop}`
                 }, time, 'linear')
 
@@ -101,7 +102,9 @@ $(document).ready(function () {
                     clearInterval(shuffle)
 
                     // enable to click on cups
-                    $('.cup').removeClass('avoid-clicks')
+                    $('.cup').promise().done(() => {
+                        $('.cup').removeClass('avoid-clicks')
+                    })
                 }
 
                 soundMoveLeft.currentTime = 0.04
@@ -161,9 +164,10 @@ $(document).ready(function () {
         })
         
         // set cups to their initial positions
-        $('.cup1').css('left', cup1)
-        $('.cup2').css('left', cup2)
-        $('.cup3').css('left', cup3)
+        $('.cup').css({
+            'left': '',
+            'top': ''
+        })
         
         // manage shuffle speed
         if (time <= 300 && time > 100) {
@@ -197,9 +201,10 @@ $(document).ready(function () {
         })
 
         // set cups to their initial positions
-        $('.cup1').css('left', cup1)
-        $('.cup2').css('left', cup2)
-        $('.cup3').css('left', cup3)
+        $('.cup').css({
+            'left': '',
+            'top': ''
+        })
 
         // reset time
         time = 300
